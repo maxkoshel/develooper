@@ -21,14 +21,16 @@ A Telegram bot that manages [Claude Code](https://docs.anthropic.com/en/docs/cla
 ## Architecture
 
 ```
-+----------+    +-----------------+    +------------+    +-------------+
-| Telegram |----> Concierg Session |----> Dispatcher |----> Worker Pool |
-|   User   |<---| (classifier)    |    | (router)   |    | (Claude Code)|
-+----------+    +-----------------+    +-----+------+    +------+------+
-     ^                                       |                  |
-     |          +------------------+         |                  |
-     +----------| Telegram replies |<--------+------------------+
-                +------------------+    responses & questions
+                        incoming messages
++----------+    +----------+    +-----------+    +------------+    +-------------+
+| Telegram |----> Telegram |----> Concierg  |----> Dispatcher |----> Worker Pool |
+|   User   |    | Bot      |    | Session   |    | (router)   |    | (Claude Code)|
++----------+    +----+-----+    +-----------+    +-----+------+    +------+------+
+                     ^                                 |                  |
+                     |   formatted messages,           |                  |
+                     |   questions, photos             |                  |
+                     +---------------------------------+------------------+
+                        responses & notifications
 
 +-----------+    +----------+    +-----------------+
 | Scheduler |    | Watchdog |    | Health Monitor  |
