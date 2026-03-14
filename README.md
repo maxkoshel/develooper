@@ -1,5 +1,11 @@
 # Conciergon
 
+<p align="center">
+  <img src="assets/conciergon-art.jpg" alt="Conciergon" width="480" />
+  <br />
+  <em>As seen through my son's eyes via ChatGPT</em>
+</p>
+
 A Telegram bot that manages [Claude Code](https://docs.anthropic.com/en/docs/claude-code) worker sessions on your projects. Send tasks in natural language via Telegram, and Conciergon spawns AI workers to implement them across your codebases.
 
 ## Features
@@ -15,20 +21,19 @@ A Telegram bot that manages [Claude Code](https://docs.anthropic.com/en/docs/cla
 ## Architecture
 
 ```
-┌──────────┐     ┌─────────────────┐     ┌────────────┐     ┌─────────────┐
-│ Telegram  │────▶│ Concierg Session │────▶│ Dispatcher  │────▶│ Worker Pool │
-│   User    │◀────│  (classifier)   │     │  (router)   │     │(Claude Code)│
-└──────────┘     └─────────────────┘     └────────────┘     └─────────────┘
-     ▲                                         │                    │
-     │            ┌────────────┐               │                    │
-     └────────────│  Telegram   │◀──────────────┴────────────────────┘
-                  │  Messages   │         responses & questions
-                  └────────────┘
++----------+    +-----------------+    +------------+    +-------------+
+| Telegram |----> Concierg Session |----> Dispatcher |----> Worker Pool |
+|   User   |<---| (classifier)    |    | (router)   |    | (Claude Code)|
++----------+    +-----------------+    +-----+------+    +------+------+
+     ^                                       |                  |
+     |          +------------------+         |                  |
+     +----------| Telegram replies |<--------+------------------+
+                +------------------+    responses & questions
 
-  ┌───────────┐     ┌──────────┐     ┌─────────────────┐
-  │ Scheduler │     │ Watchdog │     │ Health Monitor   │
-  │  (cron)   │     │  (idle)  │     │ (auto-recovery)  │
-  └───────────┘     └──────────┘     └─────────────────┘
++-----------+    +----------+    +-----------------+
+| Scheduler |    | Watchdog |    | Health Monitor  |
+| (cron)    |    | (idle)   |    | (auto-recovery) |
++-----------+    +----------+    +-----------------+
 ```
 
 **Message flow:** User sends a Telegram message → Concierg Session (a persistent Claude Code subprocess) classifies the intent → Dispatcher routes it → Worker (another Claude Code subprocess) executes the task on the target project → Results sent back via Telegram.
