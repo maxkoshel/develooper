@@ -1,11 +1,5 @@
 # Conciergon
 
-<p align="center">
-  <img src="assets/conciergon-art.jpg" alt="Conciergon" width="480" />
-  <br />
-  <em>As seen through my son's eyes via ChatGPT</em>
-</p>
-
 A Telegram bot that manages [Claude Code](https://docs.anthropic.com/en/docs/claude-code) worker sessions on your projects. Send tasks in natural language via Telegram, and Conciergon spawns AI workers to implement them across your codebases.
 
 ## Features
