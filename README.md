@@ -1,6 +1,6 @@
-# Conciergon
+# Develooper
 
-A Telegram bot that manages [Claude Code](https://docs.anthropic.com/en/docs/claude-code) worker sessions on your projects. Send tasks in natural language via Telegram, and Conciergon spawns AI workers to implement them across your codebases.
+A Telegram bot that manages [Claude Code](https://docs.anthropic.com/en/docs/claude-code) worker sessions on your projects. Send tasks in natural language via Telegram, and Develooper spawns AI workers to implement them across your codebases.
 
 ## Features
 
@@ -45,8 +45,8 @@ A Telegram bot that manages [Claude Code](https://docs.anthropic.com/en/docs/cla
 
 ```bash
 # 1. Clone
-git clone https://github.com/anthropics/conciergon.git
-cd conciergon
+git clone https://github.com/maxkoshel/develooper.git
+cd develooper
 
 # 2. Install dependencies
 npm install
@@ -78,7 +78,7 @@ cp .env.example .env
 | `ANTHROPIC_AUTH_TOKEN` | One of these | — | OAuth token (from `claude login`) |
 | `ANTHROPIC_API_KEY` | One of these | — | API key (alternative to OAuth) |
 | `PROJECTS_DIR` | No | `~/projects` | Directory to scan for projects |
-| `DB_PATH` | No | `./data/conciergon.db` | SQLite database file path |
+| `DB_PATH` | No | `./data/develooper.db` | SQLite database file path |
 | `HEALTH_PORT` | No | `3847` | HTTP health endpoint port |
 | `WATCHDOG_INTERVAL_MS` | No | `1500` | Idle worker check frequency (ms) |
 | `WORKER_IDLE_TIMEOUT_S` | No | `300` | Seconds before worker idle alert |
@@ -90,9 +90,9 @@ cp .env.example .env
 
 ### Authentication
 
-Conciergon needs Anthropic credentials to run Claude Code workers. Two options:
+Develooper needs Anthropic credentials to run Claude Code workers. Two options:
 
-1. **OAuth (recommended):** Run `claude login` to authenticate via the Claude Code CLI. Conciergon reads the OAuth token from the macOS Keychain and auto-refreshes it.
+1. **OAuth (recommended):** Run `claude login` to authenticate via the Claude Code CLI. Develooper reads the OAuth token from the macOS Keychain and auto-refreshes it.
 
 2. **API Key:** Set `ANTHROPIC_API_KEY` in `.env`. Works on all platforms. No auto-refresh needed (keys don't expire).
 

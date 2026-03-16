@@ -1,4 +1,4 @@
-# Conciergon Development Rules
+# Develooper Development Rules
 
 ## Server Restart
 
@@ -12,7 +12,7 @@ Never leave code changes untested. The server must be running to verify changes 
 
 ## Project Overview
 
-Conciergon is a Telegram bot that manages Claude Code worker sessions on projects. It uses a persistent ConciergSession (Claude Code SDK subprocess) for message classification and conversational replies, with a local regex classifier as fallback.
+Develooper is a Telegram bot that manages Claude Code worker sessions on projects. It uses a persistent ConciergSession (Claude Code SDK subprocess) for message classification and conversational replies, with a local regex classifier as fallback.
 
 ## Key Architecture
 

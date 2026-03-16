@@ -1,10 +1,10 @@
 # Deployment Guide
 
-Conciergon runs as a long-lived Node.js process. Below are options for running it as a system service.
+Develooper runs as a long-lived Node.js process. Below are options for running it as a system service.
 
 ## macOS (launchd)
 
-Create a plist file at `~/Library/LaunchAgents/com.conciergon.bot.plist`:
+Create a plist file at `~/Library/LaunchAgents/com.develooper.bot.plist`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -12,7 +12,7 @@ Create a plist file at `~/Library/LaunchAgents/com.conciergon.bot.plist`:
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.conciergon.bot</string>
+    <string>com.develooper.bot</string>
     <key>ProgramArguments</key>
     <array>
         <string>node</string>
@@ -22,7 +22,7 @@ Create a plist file at `~/Library/LaunchAgents/com.conciergon.bot.plist`:
         <string>src/index.ts</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>/path/to/conciergon</string>
+    <string>/path/to/develooper</string>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
@@ -30,55 +30,55 @@ Create a plist file at `~/Library/LaunchAgents/com.conciergon.bot.plist`:
     <key>ThrottleInterval</key>
     <integer>30</integer>
     <key>StandardOutPath</key>
-    <string>/tmp/conciergon.log</string>
+    <string>/tmp/develooper.log</string>
     <key>StandardErrorPath</key>
-    <string>/tmp/conciergon.err</string>
+    <string>/tmp/develooper.err</string>
 </dict>
 </plist>
 ```
 
-Replace `/path/to/conciergon` with the actual directory path.
+Replace `/path/to/develooper` with the actual directory path.
 
 ### Service management
 
 ```bash
 # Load and start
-launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.conciergon.bot.plist
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.develooper.bot.plist
 
 # Status
-launchctl list | grep conciergon
+launchctl list | grep develooper
 
 # Restart
-launchctl kickstart -k gui/$(id -u)/com.conciergon.bot
+launchctl kickstart -k gui/$(id -u)/com.develooper.bot
 
 # Stop
-launchctl bootout gui/$(id -u)/com.conciergon.bot
+launchctl bootout gui/$(id -u)/com.develooper.bot
 ```
 
 ## Linux (systemd)
 
-Create a unit file at `~/.config/systemd/user/conciergon.service`:
+Create a unit file at `~/.config/systemd/user/develooper.service`:
 
 ```ini
 [Unit]
-Description=Conciergon Telegram Bot
+Description=Develooper Telegram Bot
 After=network-online.target
 Wants=network-online.target
 
 [Service]
 Type=simple
-WorkingDirectory=/path/to/conciergon
+WorkingDirectory=/path/to/develooper
 ExecStart=/usr/bin/node --env-file=.env --import tsx src/index.ts
 Restart=always
 RestartSec=30
-StandardOutput=append:/tmp/conciergon.log
-StandardError=append:/tmp/conciergon.err
+StandardOutput=append:/tmp/develooper.log
+StandardError=append:/tmp/develooper.err
 
 [Install]
 WantedBy=default.target
 ```
 
-Replace `/path/to/conciergon` with the actual directory path.
+Replace `/path/to/develooper` with the actual directory path.
 
 ### Service management
 
@@ -87,27 +87,27 @@ Replace `/path/to/conciergon` with the actual directory path.
 systemctl --user daemon-reload
 
 # Enable (start on boot)
-systemctl --user enable conciergon
+systemctl --user enable develooper
 
 # Start
-systemctl --user start conciergon
+systemctl --user start develooper
 
 # Status
-systemctl --user status conciergon
+systemctl --user status develooper
 
 # Restart
-systemctl --user restart conciergon
+systemctl --user restart develooper
 
 # Stop
-systemctl --user stop conciergon
+systemctl --user stop develooper
 
 # Logs
-journalctl --user -u conciergon -f
+journalctl --user -u develooper -f
 ```
 
 ## Health Endpoint
 
-Conciergon exposes an HTTP health endpoint at `http://localhost:3847/health` (configurable via `HEALTH_PORT`). Use it for monitoring:
+Develooper exposes an HTTP health endpoint at `http://localhost:3847/health` (configurable via `HEALTH_PORT`). Use it for monitoring:
 
 ```bash
 curl http://localhost:3847/health | jq
@@ -117,7 +117,7 @@ Returns JSON with Telegram status, SDK status, uptime, and active message count.
 
 ## Logs
 
-By default, Conciergon logs to stdout/stderr using [pino](https://github.com/pinojs/pino). Set `LOG_LEVEL` in `.env` to control verbosity.
+By default, Develooper logs to stdout/stderr using [pino](https://github.com/pinojs/pino). Set `LOG_LEVEL` in `.env` to control verbosity.
 
 For pretty-printed development logs:
 ```bash

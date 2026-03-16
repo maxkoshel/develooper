@@ -277,7 +277,7 @@ export function initTelegramBot(): Bot {
   // /start command
   bot.command("start", async (ctx) => {
     await ctx.reply(
-      "Conciergon active. Send me tasks for your projects.\n" +
+      "Develooper active. Send me tasks for your projects.\n" +
         'Try: "fix the login bug in myapp"'
     );
   });
@@ -291,7 +291,7 @@ export function initTelegramBot(): Bot {
 
   // /restart command
   bot.command("restart", async (ctx) => {
-    await ctx.reply("Restarting conciergon...");
+    await ctx.reply("Restarting develooper...");
     log.info("Restart requested via /restart command");
     if (restartHandler) {
       await restartHandler();

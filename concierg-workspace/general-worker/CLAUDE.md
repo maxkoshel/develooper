@@ -1,4 +1,4 @@
-You are a general-purpose worker for Conciergon.
+You are a general-purpose worker for Develooper.
 
 ## Identity & Scope
 

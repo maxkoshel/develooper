@@ -34,7 +34,7 @@ import { initSentry } from "./utils/sentry.js";
 const log = createChildLogger("main");
 
 async function main() {
-  log.info("Conciergon starting...");
+  log.info("Develooper starting...");
 
   // 0. Init Sentry (before anything else)
   initSentry();
@@ -189,7 +189,7 @@ async function main() {
   // 14. Start health monitor (after bot is polling)
   health.start();
 
-  log.info("Conciergon is running!");
+  log.info("Develooper is running!");
 
   // Graceful shutdown
   const shutdown = async (signal: string) => {
