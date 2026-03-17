@@ -78,7 +78,7 @@ export async function runSetup(): Promise<void> {
         {
           value: "oauth",
           label: "Claude Code OAuth (recommended)",
-          hint: "run `claude login` first",
+          hint: "run `claude auth login` first",
         },
         {
           value: "apikey",
@@ -97,14 +97,14 @@ export async function runSetup(): Promise<void> {
     if (cliCheck.found) {
       p.log.success(`Claude Code CLI found: ${cliCheck.path}`);
       p.note(
-        "Make sure you've run `claude login` to authenticate.\n" +
+        "Make sure you've run `claude auth login` to authenticate.\n" +
           "Develooper will use your OAuth token automatically.",
         "OAuth Authentication"
       );
     } else {
       p.log.warning("Claude Code CLI not found in PATH.");
       p.note(
-        "Install Claude Code CLI and run `claude login` before starting Develooper.\n" +
+        "Install Claude Code CLI and run `claude auth login` before starting Develooper.\n" +
           "See: https://docs.anthropic.com/en/docs/claude-code",
         "Action Required"
       );
@@ -223,7 +223,7 @@ export async function runSetup(): Promise<void> {
   const summaryLines = [
     `Bot: @${tokenResult.botName ?? "unknown"}`,
     `Users: ${userId.trim()}`,
-    `Auth: ${authMethod === "oauth" ? "OAuth (claude login)" : "API Key"}`,
+    `Auth: ${authMethod === "oauth" ? "OAuth (claude auth login)" : "API Key"}`,
     `Projects: ${projectsDir.trim()}`,
   ];
   if (logLevel && logLevel !== "info") summaryLines.push(`Log level: ${logLevel}`);

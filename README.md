@@ -37,7 +37,7 @@ A Telegram bot that manages [Claude Code](https://docs.anthropic.com/en/docs/cla
 ## Prerequisites
 
 - **Node.js 22+**
-- **Claude Code CLI** — install and authenticate with `claude login`
+- **Claude Code CLI** — install and authenticate with `claude auth login`
 - **Telegram bot** — create one via [@BotFather](https://t.me/BotFather)
 - **macOS or Linux** (token auto-refresh requires macOS Keychain; on Linux, use API key auth)
 
@@ -75,7 +75,7 @@ cp .env.example .env
 |----------|----------|---------|-------------|
 | `TELEGRAM_BOT_TOKEN` | Yes | — | Bot token from @BotFather |
 | `TELEGRAM_ALLOWED_USERS` | Yes | — | Comma-separated Telegram user IDs with access |
-| `ANTHROPIC_AUTH_TOKEN` | One of these | — | OAuth token (from `claude login`) |
+| `ANTHROPIC_AUTH_TOKEN` | One of these | — | OAuth token (from `claude auth login`) |
 | `ANTHROPIC_API_KEY` | One of these | — | API key (alternative to OAuth) |
 | `PROJECTS_DIR` | No | `~/projects` | Directory to scan for projects |
 | `DB_PATH` | No | `./data/develooper.db` | SQLite database file path |
@@ -92,7 +92,7 @@ cp .env.example .env
 
 Develooper needs Anthropic credentials to run Claude Code workers. Two options:
 
-1. **OAuth (recommended):** Run `claude login` to authenticate via the Claude Code CLI. Develooper reads the OAuth token from the macOS Keychain and auto-refreshes it.
+1. **OAuth (recommended):** Run `claude auth login` to authenticate via the Claude Code CLI. Develooper reads the OAuth token from the macOS Keychain and auto-refreshes it.
 
 2. **API Key:** Set `ANTHROPIC_API_KEY` in `.env`. Works on all platforms. No auto-refresh needed (keys don't expire).
 
