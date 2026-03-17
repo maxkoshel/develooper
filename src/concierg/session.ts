@@ -13,6 +13,7 @@ import {
   setMcpContext,
   clearMcpContext,
   getRegisteredIntents,
+  wasMessageSent,
   type RegisteredIntent,
 } from "./mcp-tools.js";
 
@@ -203,6 +204,7 @@ export class ConciergSession {
     setMcpContext({
       chatId: chatId ?? 0,
       intents: [],
+      messageSent: false,
       sendMessage: sendMessageFn,
       sendPhoto: sendPhotoFn ?? (async () => {}),
     });
@@ -327,7 +329,13 @@ export class ConciergSession {
       ]);
     } catch (err: any) {
       if (err?.message?.includes("exited with code 1")) {
-        log.warn("SDK exited with code 1, continuing with collected intents");
+        log.warn({ err }, "SDK exited with code 1, continuing with collected intents");
+        // Send fallback only if Claude didn't already respond to the user
+        if (chatId && !wasMessageSent() && getRegisteredIntents().length === 0) {
+          try {
+            await sendMessageFn(chatId, "Something went wrong processing your message. Please try again.");
+          } catch { /* ignore send errors */ }
+        }
       } else {
         log.error({ err }, "Concierg query error");
         captureException(err);

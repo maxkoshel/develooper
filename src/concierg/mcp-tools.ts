@@ -33,6 +33,7 @@ export interface RegisteredIntent {
 interface McpContext {
   chatId: number;
   intents: RegisteredIntent[];
+  messageSent: boolean;
   sendMessage: (chatId: number, text: string) => Promise<void>;
   sendPhoto: (chatId: number, photoPath: string, caption?: string) => Promise<void>;
 }
@@ -45,6 +46,10 @@ export function setMcpContext(ctx: McpContext): void {
 
 export function clearMcpContext(): void {
   currentCtx = null;
+}
+
+export function wasMessageSent(): boolean {
+  return currentCtx?.messageSent ?? false;
 }
 
 // --- Pool info getter (set once at startup from index.ts) ---
@@ -93,6 +98,7 @@ const sendTelegramMessageTool = tool(
     }
     try {
       await currentCtx.sendMessage(currentCtx.chatId, args.text);
+      currentCtx.messageSent = true;
       return { content: [{ type: "text" as const, text: "Message sent successfully" }] };
     } catch (err) {
       const msg = err instanceof Error ? err.message : String(err);
