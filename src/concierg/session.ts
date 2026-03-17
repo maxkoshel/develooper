@@ -3,9 +3,6 @@ import { fileURLToPath } from "node:url";
 import {
   query,
   type CanUseTool,
-  type SDKAssistantMessage,
-  type SDKMessage,
-  type SDKResultMessage,
 } from "@anthropic-ai/claude-code";
 import { getConciergContext } from "../db/queries.js";
 import { buildCleanEnv } from "../utils/env.js";

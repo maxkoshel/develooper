@@ -1,6 +1,6 @@
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import { Api, Bot, Context, InlineKeyboard, InputFile } from "grammy";
+import { Api, Bot, InputFile } from "grammy";
 import { getConfig } from "../config/index.js";
 import { createChildLogger } from "../utils/logger.js";
 import { captureException } from "../utils/sentry.js";

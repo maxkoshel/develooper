@@ -2,7 +2,6 @@ import type {
   MarkdownIR,
   MarkdownLinkSpan,
   IRRenderer,
-  StyleMarker,
   RenderedLink,
 } from "../markdown/index.js";
 import { markdownToIR, chunkIR } from "../markdown/index.js";

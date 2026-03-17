@@ -2,9 +2,7 @@ import {
   query,
   type Query,
   type Options,
-  type SDKMessage,
   type SDKResultMessage,
-  type SDKUserMessage,
   type CanUseTool,
   type HookCallback,
 } from "@anthropic-ai/claude-code";

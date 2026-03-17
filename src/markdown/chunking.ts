@@ -1,4 +1,4 @@
-import type { MarkdownIR, MarkdownStyleSpan, MarkdownLinkSpan, ChunkOptions } from "./types.js";
+import type { MarkdownIR, ChunkOptions } from "./types.js";
 
 /**
  * Split IR into chunks not exceeding maxLength.
