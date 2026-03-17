@@ -15,7 +15,7 @@ Create a plist file at `~/Library/LaunchAgents/com.develooper.bot.plist`:
     <string>com.develooper.bot</string>
     <key>ProgramArguments</key>
     <array>
-        <string>node</string>
+        <string>/path/to/node</string>
         <string>--env-file=.env</string>
         <string>--import</string>
         <string>tsx</string>
@@ -37,7 +37,7 @@ Create a plist file at `~/Library/LaunchAgents/com.develooper.bot.plist`:
 </plist>
 ```
 
-Replace `/path/to/develooper` with the actual directory path.
+Replace `/path/to/develooper` with the actual directory path, and `/path/to/node` with the absolute path from `which node` (e.g. `/Users/you/.nvm/versions/node/v24.x.x/bin/node`). launchd has a minimal PATH and cannot find `node` by name.
 
 ### Service management
 
